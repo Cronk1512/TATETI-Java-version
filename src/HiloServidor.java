@@ -39,19 +39,19 @@ public class HiloServidor extends Thread {
         InetAddress ipCliente = dp.getAddress();
         int puertoCliente = dp.getPort();
 
-        if (msg.startsWith("REGISTRO_")) {
+        if (msg.startsWith("Registro_")) {
             if (contadorUsuarios < 2) {
                 String[] partes = msg.split("_");
                 String nombre = partes[1];
                 String eleccion = partes[2];
                 usuarios[contadorUsuarios] = new Usuario(nombre, ipCliente, puertoCliente, eleccion);
                 contadorUsuarios++;
-                enviarMensaje("REGISTRO_OK", ipCliente, puertoCliente);
+                enviarMensaje("Registro_OK", ipCliente, puertoCliente);
                 if (contadorUsuarios == 2) {
-                    enviarMensajeATodos("PARTIDA_INICIADA_Es turno de " + usuarios[0].getNombre());
+                    enviarMensajeATodos("Comienza_Es turno de " + usuarios[0].getNombre());
                 }
             }
-        } else if (msg.startsWith("MOVIMIENTO_")) {
+        } else if (msg.startsWith("movimiento_")) {
             String[] partes = msg.split("_");
             String nombre = partes[1];
             int fila = Integer.parseInt(partes[2]);
@@ -68,13 +68,13 @@ public class HiloServidor extends Thread {
                 if (jugadorActual == turno && tablero[fila][columna].equals("-")) {
                     tablero[fila][columna] = (jugadorActual == 0) ? "X" : "O";
                     turno = 1 - turno;
-                    enviarMensajeATodos("TABLERO_Fila:" + fila + " Col:" + columna + " por " + nombre);
+                    enviarMensajeATodos("tablero_Fila:" + fila + " Col:" + columna + " por " + nombre);
                     if (verificarGanador()) {
                         enviarMensajeATodos("FIN_GANADOR_" + nombre);
                     } else if (verificarEmpate()) {
                         enviarMensajeATodos("FIN_EMPATE");
                     } else {
-                        enviarMensajeATodos("TURNO_" + usuarios[turno].getNombre());
+                        enviarMensajeATodos("turnito_" + usuarios[turno].getNombre());
                     }
                 }
             }

@@ -4,7 +4,7 @@ public class Cliente {
     public static HiloCliente hc;
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Arrancando");
+        System.out.println("Arranca");
         System.out.print("Ingrese su nombre: ");
         String nombre = scanner.nextLine();
         System.out.print("Elija cara o cruz: ");

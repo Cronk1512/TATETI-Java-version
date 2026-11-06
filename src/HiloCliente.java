@@ -27,13 +27,13 @@ public class HiloCliente extends Thread {
         } catch (UnknownHostException e) {
             throw new RuntimeException(e);
         }
-        enviarMensaje("REGISTRO_" + nombre + "_" + eleccion);
+        enviarMensaje("Registro_" + nombre + "_" + eleccion);
     }
 
     private void procesarMensaje(DatagramPacket dp) {
         String msg = (new String(dp.getData())).trim();
 
-        if (msg.startsWith("TABLERO_")) {
+        if (msg.startsWith("tablero_")) {
             String[] partes = msg.split("_");
             String info = partes[1];
             String[] subPartes = info.split(" ");
@@ -44,9 +44,9 @@ public class HiloCliente extends Thread {
             String simbolo = jugadorMovimiento.equals(nombre) ? "X" : "O";
             tablero[fila][col] = simbolo;
             mostrarTablero();
-        } else if (msg.startsWith("TURNO_") || msg.startsWith("PARTIDA_INICIADA_")) {
+        } else if (msg.startsWith("turnito_") || msg.startsWith("Comienza_")) {
             String jugadorTurno = "";
-            if (msg.startsWith("TURNO_")) {
+            if (msg.startsWith("turnito_")) {
                 jugadorTurno = msg.split("_")[1];
             } else {
                 String[] partes = msg.split("Es turno de ");
@@ -101,6 +101,6 @@ public class HiloCliente extends Thread {
     }
 
     public void hacerMovimiento(int fila, int columna) {
-        enviarMensaje("MOVIMIENTO_" + nombre + "_" + fila + "_" + columna);
+        enviarMensaje("movimiento_" + nombre + "_" + fila + "_" + columna);
     }
 }
