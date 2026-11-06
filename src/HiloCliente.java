@@ -39,7 +39,7 @@ public class HiloCliente extends Thread {
             String[] subPartes = info.split(" ");
             int fila = Integer.parseInt(subPartes[0].split(":")[1]);
             int col = Integer.parseInt(subPartes[1].split(":")[1]);
-            String jugadorMovimiento = subPartes[3]; // Corregido al índice 3
+            String jugadorMovimiento = subPartes[3];
 
             String simbolo = jugadorMovimiento.equals(nombre) ? "X" : "O";
             tablero[fila][col] = simbolo;
